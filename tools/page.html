@@ -1,0 +1,442 @@
+<title>VAT Schedule 02 Checker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Check a Sri Lanka IRD VAT Schedule 02 (input VAT) CSV in your browser with the same rules as IRD's Schedule File Verifier v5.20.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one working column. Tool on top (file, period code, verdict, error grid), reference below. */
+:root {
+  --paper: #f5f7f9;
+  --sheet: #ffffff;
+  --ink: #15212e;
+  --muted: #5a6877;
+  --rule: #d9e0e7;
+  --accent: #1f5f8b;
+  --accent-soft: #e3eef6;
+  --ok: #1d7a46;
+  --ok-soft: #e4f4ea;
+  --bad: #b3261e;
+  --bad-soft: #fbe9e7;
+  --warn: #8a5a00;
+  --warn-soft: #fff4dc;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0f161d; --sheet: #16202a; --ink: #e4ebf1; --muted: #98a6b4; --rule: #2a3744;
+  --accent: #7db7e0; --accent-soft: #1b3040; --ok: #5fcf8e; --ok-soft: #15301f;
+  --bad: #ff8a80; --bad-soft: #3a1c1a; --warn: #f0c060; --warn-soft: #33290f; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #0f161d; --sheet: #16202a; --ink: #e4ebf1; --muted: #98a6b4; --rule: #2a3744;
+  --accent: #7db7e0; --accent-soft: #1b3040; --ok: #5fcf8e; --ok-soft: #15301f;
+  --bad: #ff8a80; --bad-soft: #3a1c1a; --warn: #f0c060; --warn-soft: #33290f; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.15rem; font-weight: 700; }
+h3 { font-size: 0.95rem; font-weight: 600; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 68ch; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--muted); }
+a { color: var(--accent); }
+header { display: grid; gap: 8px; }
+.tag { font-size: 0.85rem; color: var(--muted); max-width: 72ch; }
+.tag b { color: var(--ink); font-weight: 600; }
+
+.sheet { background: var(--sheet); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 16px; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.inputs { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 760px) { .inputs { grid-template-columns: 1fr; } }
+
+.drop { border: 2px dashed var(--rule); border-radius: 8px; padding: 18px; display: grid; gap: 10px; cursor: pointer; transition: border-color .15s, background .15s; }
+.drop:hover, .drop.over { border-color: var(--accent); background: var(--accent-soft); }
+.drop:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.drop input[type=file] { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.drop .big { font-weight: 600; }
+.fname { display: grid; gap: 4px; }
+input[type=text], select { font: inherit; color: var(--ink); background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; width: 100%; min-width: 0; }
+input[type=text]:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+#fileName { font-family: var(--font-mono); font-size: 0.85rem; }
+.parts { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.8rem; }
+.chip { border-radius: 999px; padding: 2px 10px; background: var(--accent-soft); color: var(--ink); }
+.chip.bad { background: var(--bad-soft); color: var(--bad); }
+.chip.warn { background: var(--warn-soft); color: var(--warn); }
+
+.period { display: grid; gap: 10px; align-content: start; }
+.code-row { display: flex; gap: 10px; align-items: stretch; }
+#periodCode { font-family: var(--font-mono); font-size: 2rem; font-weight: 600; letter-spacing: 0.12em; text-align: center; width: 7.2ch; padding: 4px 6px; }
+.code-side { display: grid; gap: 4px; align-content: center; font-size: 0.85rem; color: var(--muted); min-width: 0; }
+.helper { display: flex; gap: 8px; flex-wrap: wrap; }
+.helper select { width: auto; flex: 1 1 100px; min-width: 0; }
+
+button { font: inherit; font-weight: 600; border-radius: 6px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); padding: 7px 12px; cursor: pointer; }
+button:hover { border-color: var(--accent); color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+button.small { padding: 3px 9px; font-size: 0.8rem; }
+
+.verdict { border-radius: 8px; padding: 16px 18px; display: grid; gap: 6px; border: 1px solid transparent; }
+.verdict.ok { background: var(--ok-soft); border-color: var(--ok); }
+.verdict.bad { background: var(--bad-soft); border-color: var(--bad); }
+.verdict.idle { background: var(--accent-soft); }
+.verdict .head { font-size: 1.15rem; font-weight: 700; }
+.verdict.ok .head { color: var(--ok); }
+.verdict.bad .head { color: var(--bad); }
+.popup { font-family: var(--font-mono); font-size: 0.9rem; white-space: pre-wrap; background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; }
+.steps { display: flex; flex-wrap: wrap; gap: 4px; font-size: 0.78rem; }
+.steps span { padding: 2px 8px; border-radius: 4px; background: var(--sheet); border: 1px solid var(--rule); color: var(--muted); }
+.steps span.pass { color: var(--ok); border-color: var(--ok); }
+.steps span.stop { color: var(--bad); border-color: var(--bad); font-weight: 700; }
+.note { font-size: 0.85rem; color: var(--muted); }
+.warnbox { background: var(--warn-soft); color: var(--warn); border-radius: 6px; padding: 8px 12px; font-size: 0.88rem; }
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.86rem; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); background: var(--paper); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+td .fix { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+
+.ref { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+@media (max-width: 760px) { .ref { grid-template-columns: 1fr; } }
+.ref > div { align-content: start; }
+.ref ol, .ref ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.codes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; font-size: 0.82rem; }
+.codes div { border: 1px solid var(--rule); border-radius: 6px; padding: 6px 8px; display: grid; }
+.codes .mono { font-weight: 600; font-size: 0.95rem; }
+.codes .q { background: var(--accent-soft); }
+@media (max-width: 460px) { .codes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+code { font-family: var(--font-mono); font-size: 0.85em; background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 0 4px; overflow-wrap: anywhere; }
+details { border-top: 1px solid var(--rule); padding-top: 12px; }
+summary { cursor: pointer; font-weight: 600; }
+footer { font-size: 0.8rem; color: var(--muted); display: grid; gap: 4px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>VAT Schedule 02 Checker</h1>
+    <p class="lede">Check your input VAT schedule (local purchases) before you upload it with the VAT return. It uses the same rules, in the same order, with the same messages as IRD's Schedule File Verifier v5.20, so you can check the file on any computer, including a Mac or a phone.</p>
+    <p class="tag">Your file stays on this device: <b>nothing is uploaded</b>. Unofficial tool, not made by or affiliated with the Inland Revenue Department.</p>
+  </header>
+
+  <section class="sheet" aria-labelledby="t-check">
+    <h2 id="t-check">Check a file</h2>
+    <div class="inputs">
+      <div style="display:grid; gap:12px; min-width:0">
+        <label class="drop" id="drop" for="file">
+          <input type="file" id="file" accept=".csv,text/csv,text/plain">
+          <span class="big">Choose the .csv file, or drop it here</span>
+          <span class="note" id="fileInfo">Showing an example file. Pick your own to check it.</span>
+        </label>
+        <div class="fname">
+          <label class="label" for="fileName">File name (IRD's tool checks this too)</label>
+          <input type="text" id="fileName" spellcheck="false" autocomplete="off">
+          <div class="parts" id="nameParts"></div>
+        </div>
+      </div>
+      <div class="period">
+        <label class="label" for="periodCode">Period code (type this in IRD's tool)</label>
+        <div class="code-row">
+          <input type="text" id="periodCode" inputmode="numeric" maxlength="6" spellcheck="false" autocomplete="off">
+          <div class="code-side">
+            <span id="periodText">–</span>
+            <span><button type="button" class="small" id="copyCode">Copy code</button></span>
+          </div>
+        </div>
+        <div class="helper" aria-label="Work out the code">
+          <select id="pYear" aria-label="Year"></select>
+          <select id="pPart" aria-label="Month or quarter"></select>
+          <button type="button" id="useCode">Use</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="verdict" class="verdict idle" aria-live="polite"></div>
+    <div id="errorsBox" hidden>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Serial No</th><th>Line</th><th>Supplier</th><th>Invoice</th><th>Problem</th></tr></thead>
+          <tbody id="errorRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet ref" aria-label="Reference">
+    <div style="display:grid; gap:14px; min-width:0">
+      <h2>The period code</h2>
+      <p>Four digits: the year (<span class="mono">26</span>), the calendar quarter (<span class="mono">1</span>–<span class="mono">4</span>, January–March is 1), then the month within that quarter (<span class="mono">1</span>–<span class="mono">3</span>), or <span class="mono">0</span> for the whole quarter. These are calendar quarters, not the April tax year.</p>
+      <div class="codes" id="codeTable"></div>
+      <p class="note">The code goes in two places: the file name and the Period code box. IRD's tool never checks that they agree, so this page warns you when they don't. An empty box or a code like <span class="mono">2603</span> makes IRD's tool stop with an error.</p>
+    </div>
+    <div style="display:grid; gap:14px; min-width:0">
+      <h2>Check it with IRD's own tool (Windows only)</h2>
+      <ol>
+        <li>Download "Schedule File Verifier Tool" (version 5.20) from <a href="https://www.ird.gov.lk" target="_blank" rel="noopener">ird.gov.lk</a> &gt; Downloads &gt; Tools. Unzip it and open <code>ScheduleFileVerifier.exe</code>.</li>
+        <li>Click "VAT Schedule Verifier". File Type: "VAT Schedule02".</li>
+        <li>Period code: type the code shown on this page. It must not be empty.</li>
+        <li>Browse: pick the .csv file. Don't open it in Excel and save it, because Excel changes dates and numbers. Don't rename it.</li>
+        <li>Click Verify. "Validation passed!" means you can upload it with the e-filing return. Otherwise the list shows the row (Serial Number) and the reason.</li>
+      </ol>
+    </div>
+    <details style="grid-column: 1 / -1">
+      <summary>What IRD's tool accepts</summary>
+      <div style="display:grid; gap:12px; margin-top:12px">
+        <p><b>File name:</b> <code>{yourTIN}_VAT_SCHEDULE02_{periodcode}_{YYYYMMDD}_ORIGINAL_V{n}.csv</code>, for example <code>100000016_VAT_SCHEDULE02_2640_20261119_ORIGINAL_V1.csv</code>. Your TIN must have a valid check digit. Upper or lower case is fine. Nothing may be added: <code>… (1).csv</code> from a second browser download is rejected.</p>
+        <p><b>Line 1</b> is this header (any order, any case, exactly these 9 columns):</p>
+        <p><code id="headerText">Serial No,Invoice Date,Tax Invoice No,Supplier's TIN,Name of the Supplier,Description,Value of purchase,VAT Amount,Disallowed VAT Amount</code> <button type="button" class="small" id="copyHeader">Copy header</button></p>
+        <p>Then one line per invoice. No total row and no blank lines. The tool splits on commas and knows nothing about quotes, so a comma inside a supplier name or description breaks the file, and quotes are kept as part of the value.</p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Column</th><th>Rule</th></tr></thead>
+            <tbody>
+              <tr><td>Serial No</td><td>Whole number from 1, unique. "01" and "1" count as different.</td></tr>
+              <tr><td>Invoice Date</td><td>Month/day/year, e.g. <code>10/05/2026</code> or <code>10/5/2026</code>. Not after the end of the period.</td></tr>
+              <tr><td>Tax Invoice No</td><td>Up to 40 characters, only A–Z a–z 0–9 _ / -. No spaces or dots. The same number from the same supplier twice is rejected (upper and lower case count as the same).</td></tr>
+              <tr><td>Supplier's TIN</td><td>9 digits with a valid check digit. Not your own TIN. Not the VAT number form <code>xxxxxxxxx-7000</code>.</td></tr>
+              <tr><td>Name of the Supplier</td><td>Up to 100 characters.</td></tr>
+              <tr><td>Description</td><td>Up to 500 characters in the tool (IRD's Excel template says 50).</td></tr>
+              <tr><td>Value of purchase</td><td>Up to 2 decimals, up to 15 digits, not negative.</td></tr>
+              <tr><td>VAT Amount</td><td>Up to 2 decimals. Within ±0.99 of value × rate for the invoice date: 18% from 1 Jan 2024 (15% also accepted up to 28 Jan 2024), 15% from Sep 2022 to Dec 2023. 0.00 always passes.</td></tr>
+              <tr><td>Disallowed VAT Amount</td><td><code>0.00</code> when there is none (blank fails). Not negative, not more than the VAT.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">IRD's tool checks in this order and stops at the first step that fails: file name, reading the file, period code, columns and field formats, date format, business rules. Fixing one step can show errors in the next. At most 100 errors are listed.</p>
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    <p>Rules reverse-engineered from IRD's Schedule File Verifier v5.20 and matched against the real tool on 122 test files. IRD can change its tool at any time; for a final check, run IRD's own verifier.</p>
+    <p><a href="https://github.com/harshawije/ird-vat-schedule-checker" target="_blank" rel="noopener">Source code and documentation</a></p>
+  </footer>
+</div>
+
+<script>
+/*VERIFIER*/
+</script>
+<script>
+(function () {
+  'use strict';
+  var V = window.IRDVerifier;
+  var $ = function (id) { return document.getElementById(id); };
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MON = MONTHS.map(function (m) { return m.slice(0, 3); });
+  var STAGES = [['filename', 'File name'], ['read', 'Read file'], ['period', 'Period code'], ['basic', 'Columns and formats'], ['dates', 'Dates'], ['special', 'Business rules']];
+
+  // Plain-language fixes for IRD's messages, matched on the start of the text.
+  var FIXES = [
+    ['TIN number enter in name', 'The TIN at the start of the file name is wrong. Use your own 9-digit TIN.'],
+    ['Name of the file is incorrect', 'Rename the file to the pattern shown under "What IRD\'s tool accepts". Remove anything like " (1)" a browser added.'],
+    ["Please make sure there are no 'commas'", 'Remove commas from supplier names and descriptions, and remove blank lines.'],
+    ['Error : Input string was not in a correct format', 'Type the period code in the box. It must not be empty.'],
+    ['Error : String reference not set', 'The period code is not valid. Use the code from the table on this page.'],
+    ['RequiredFieldMissing', 'Fill in this field. Use 0.00 for no disallowed VAT. Remove any total row.'],
+    ['InvalidStringLength', 'Too long for this column. A supplier TIN is 9 digits, without -7000.'],
+    ['InvalidDataType', 'This must be a plain number.'],
+    ['Decimal value require', 'Use at most 2 decimals and no thousands separators.'],
+    ['is required based on the file specification', 'Add the missing column to the header line.'],
+    ['Date format is not correct', 'Write the date as month/day/year, e.g. 10/05/2026.'],
+    ['Invalid Column Count', 'The file must have exactly the 9 columns, no more.'],
+    ['Serial No provided is duplicate', 'Number the rows 1, 2, 3 … with no repeats.'],
+    ['Serial number is invalid', 'Serial numbers start at 1.'],
+    ['Duplicated Tax Invoice', 'The same invoice number from this supplier appears twice. Check for a double entry, or tell the two apart.'],
+    ['Please remove spaces', 'Remove spaces from the invoice number.'],
+    ['invalid character', 'Use only letters, digits, _ / and - in the invoice number.'],
+    ['Invoice date should not be after', 'This invoice is dated after the period. Move it to the right period, or fix the period code.'],
+    ['can not be a negative value', 'Amounts cannot be negative.'],
+    ['VAT amount should be equal', 'VAT must be value × the VAT rate (18% now), within 0.99. Check the value excludes VAT and any other tax that is not in the VAT base.'],
+    ['Disallowed tax amount should not exceed', 'Disallowed VAT cannot be more than the VAT.'],
+    ['TIN is not valid', 'The supplier TIN check digit is wrong. Check the TIN on the invoice.'],
+    ['Same TIN', 'This row uses your own TIN as the supplier.'],
+    ['unavailability of records', 'The file has no invoice rows.']
+  ];
+  function fixFor(msg) {
+    for (var i = 0; i < FIXES.length; i++) if (msg.indexOf(FIXES[i][0]) >= 0) return FIXES[i][1];
+    return '';
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+
+  // ---------------------------------------------------------- example file
+  var EXAMPLE = [
+    "Serial No,Invoice Date,Tax Invoice No,Supplier's TIN,Name of the Supplier,Description,Value of purchase,VAT Amount,Disallowed VAT Amount",
+    '1,10/03/2026,INV-1001,100000024,Example Foods Ltd,Dry goods,5000.00,900.00,0.00',
+    '2,10/08/2026,Tec 662,100000032,Example Coffee Co,Coffee beans,12000.00,2160.00,0.00',
+    '3,10/15/2026,B-2002,100000040,Example Linen Services,Laundry,8500.50,1530.09,0.00',
+    '4,10/21/2026,PR107644,100000059,Example Telecom,Internet,10000.00,2028.00,0.00',
+    '5,10/28/2026,C/3003,100000067,Example Hardware,Repairs,2500.00,450.00,0.00'
+  ].join('\r\n') + '\r\n';
+  var state = { bytes: new TextEncoder().encode(EXAMPLE), example: true };
+
+  // ---------------------------------------------------------- period helper
+  function codeText(code) {
+    var p = V.periodCodeDates(code);
+    if (!p) return null;
+    var y = Math.floor(p[0] / 10000), m1 = Math.floor(p[0] / 100) % 100, m2 = Math.floor(p[1] / 100) % 100;
+    return m1 === m2 ? MONTHS[m1 - 1] + ' ' + y : MON[m1 - 1] + '–' + MON[m2 - 1] + ' ' + y + ' (Q' + code[2] + ')';
+  }
+  function fillHelper() {
+    var now = new Date(), y = now.getFullYear();
+    for (var yr = y + 1; yr >= y - 6; yr--) $('pYear').add(new Option(String(yr), String(yr)));
+    $('pYear').value = String(y);
+    for (var q = 1; q <= 4; q++) {
+      var g = document.createElement('optgroup');
+      g.label = 'Quarter ' + q;
+      g.appendChild(new Option('Q' + q + ' ' + MON[(q - 1) * 3] + '–' + MON[(q - 1) * 3 + 2], 'q' + q));
+      for (var k = 0; k < 3; k++) g.appendChild(new Option(MONTHS[(q - 1) * 3 + k], 'm' + ((q - 1) * 3 + k + 1)));
+      $('pPart').appendChild(g);
+    }
+    var lastQ = Math.floor(now.getMonth() / 3); // previous quarter, the one usually being filed
+    if (lastQ === 0) { $('pYear').value = String(y - 1); lastQ = 4; }
+    $('pPart').value = 'q' + lastQ;
+  }
+  function helperCode() {
+    var y = +$('pYear').value, v = $('pPart').value, q = +v.slice(1);
+    return v[0] === 'q' ? V.periodCodeFor(y, [(q - 1) * 3 + 1, (q - 1) * 3 + 2, (q - 1) * 3 + 3]) : V.periodCodeFor(y, [q]);
+  }
+  function fillCodeTable() {
+    var y = +$('pYear').value, yy = String(y % 100).padStart(2, '0'), html = '';
+    for (var q = 1; q <= 4; q++) {
+      html += '<div class="q"><span class="mono">' + yy + q + '0</span><span>Q' + q + ' ' + MON[(q - 1) * 3] + '–' + MON[(q - 1) * 3 + 2] + '</span></div>';
+    }
+    // One column per quarter: row k holds month k of each quarter.
+    for (var k = 0; k < 3; k++) {
+      for (var qq = 0; qq < 4; qq++) {
+        var m = qq * 3 + k + 1;
+        html += '<div><span class="mono">' + V.periodCodeFor(y, [m]) + '</span><span>' + MONTHS[m - 1] + '</span></div>';
+      }
+    }
+    $('codeTable').innerHTML = html;
+  }
+
+  // ---------------------------------------------------------- file name parts
+  function showNameParts(name, box) {
+    var parts = name.split('_'), out = [];
+    var tin = parts[0] || '';
+    out.push('<span class="chip' + (V.tinIsValid(tin) ? '' : ' bad') + '">TIN ' + esc(tin || '?') + (V.tinIsValid(tin) ? '' : ': check digit wrong') + '</span>');
+    var nameCode = parts[3] || '';
+    if (nameCode) {
+      var t = codeText(nameCode);
+      out.push('<span class="chip' + (t ? '' : ' bad') + '">Code in name ' + esc(nameCode) + (t ? ' = ' + esc(t) : ': not a valid code') + '</span>');
+      if (box && nameCode !== box) out.push('<span class="chip warn">Name says ' + esc(nameCode) + ', box says ' + esc(box) + '</span>');
+    }
+    if (/\(\d+\)\.csv$/i.test(name) || / \(\d+\)/.test(name)) out.push('<span class="chip bad">Browser added " (n)" to the name</span>');
+    $('nameParts').innerHTML = out.join('');
+    return nameCode;
+  }
+
+  // ---------------------------------------------------------- run the check
+  function stageIndex(stage, popup) {
+    if (stage === 'filename') return 0;
+    if (stage === 'exception') {
+      if (popup.indexOf('Input string') >= 0 || popup.indexOf('String reference') >= 0) return popup.indexOf('String reference') >= 0 ? 5 : 2;
+      return 1;
+    }
+    if (stage === 'basic') return popup === 'Date format is incorrect.' ? 4 : 3;
+    if (stage === 'special') return 5;
+    return 6;
+  }
+
+  function run() {
+    var name = $('fileName').value, code = $('periodCode').value.trim() === '' ? '' : $('periodCode').value;
+    var t = codeText(code.trim());
+    $('periodText').textContent = t || (code ? 'Not a valid code' : 'Type the code');
+    showNameParts(name, code);
+
+    var r;
+    try { r = V.verify(name, state.bytes, code); }
+    catch (e) { r = { passed: false, stage: 'exception', popup: 'Error : ' + e.message, errors: [], rows: null }; }
+
+    var stop = stageIndex(r.stage, r.popup);
+    var steps = STAGES.map(function (s, i) {
+      return '<span class="' + (i < stop ? 'pass' : i === stop ? 'stop' : '') + '">' + (i < stop ? '✓ ' : i === stop ? '✕ ' : '') + s[1] + '</span>';
+    }).join('');
+
+    var v = $('verdict'), html;
+    var extra = '';
+    var nameCode = name.split('_')[3];
+    if (nameCode && code && nameCode !== code) extra += '<p class="warnbox">The file name says period ' + esc(nameCode) + ' but the box says ' + esc(code) + '. IRD\'s tool does not notice; make them agree before you upload.</p>';
+    if (state.example) extra += '<p class="note">This is an example file. Choose your own file above to check it.</p>';
+
+    if (r.passed) {
+      v.className = 'verdict ok';
+      html = '<span class="head">This file passes IRD\'s checks</span><p>IRD\'s tool would show: <b>Validation passed!</b> (verifier v5.20 rules)</p>';
+    } else {
+      v.className = 'verdict bad';
+      var count = r.errors.length;
+      html = '<span class="head">IRD\'s checker will reject this file</span>' +
+        '<p>It would stop with this message' + (count ? ' and list ' + count + ' problem' + (count === 1 ? '' : 's') + ' below' : '') + ':</p>' +
+        '<div class="popup">' + esc(r.popup.replace(/^\r\n/, '')) + '</div>' +
+        (r.errors.length ? '' : '<p class="note">' + esc(fixFor(r.popup)) + '</p>') +
+        (r.stage === 'basic' || r.stage === 'filename' || r.stage === 'exception' ? '<p class="note">IRD\'s tool stops at the first step that fails. Once these are fixed, later steps may find more.</p>' : '');
+    }
+    v.innerHTML = html + '<div class="steps">' + steps + '</div>' + extra;
+
+    // Error grid: match each Serial No back to the line(s) in the file.
+    var rows = r.rows || [];
+    $('errorsBox').hidden = !r.errors.length;
+    $('errorRows').innerHTML = r.errors.map(function (e) {
+      var match = e.serial === 'NA' ? null : rows.filter(function (row) { return row['serial no'] === e.serial; });
+      var row = match && match.length ? match[0] : null;
+      var line = match && match.length ? match.map(function (x) { return x._line; }).join(', ') : '–';
+      return '<tr><td class="num">' + esc(e.serial === '' ? '(blank)' : e.serial) + '</td><td class="num">' + esc(line) + '</td>' +
+        '<td>' + esc(row ? row['name of the supplier'] || '' : '') + '</td>' +
+        '<td class="num">' + esc(row ? row['tax invoice no'] || '' : '') + '</td>' +
+        '<td>' + esc(e.message) + '<div class="fix">' + esc(fixFor(e.message)) + '</div></td></tr>';
+    }).join('');
+  }
+
+  // ---------------------------------------------------------- wiring
+  function loadFile(f) {
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      state.bytes = new Uint8Array(reader.result);
+      state.example = false;
+      $('fileName').value = f.name;
+      $('fileInfo').textContent = f.name + ' · ' + (f.size / 1024).toFixed(1) + ' KB';
+      var nc = f.name.split('_')[3];
+      if (nc && V.periodCodeDates(nc)) $('periodCode').value = nc;
+      run();
+    };
+    reader.readAsArrayBuffer(f);
+  }
+  $('file').addEventListener('change', function () { loadFile(this.files[0]); });
+  var drop = $('drop');
+  ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function (e) { loadFile(e.dataTransfer.files[0]); });
+  $('fileName').addEventListener('input', run);
+  $('periodCode').addEventListener('input', run);
+  $('useCode').addEventListener('click', function () { $('periodCode').value = helperCode(); run(); });
+  $('pYear').addEventListener('change', fillCodeTable);
+
+  function copy(text, btn) {
+    var done = function () { var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = t; }, 1200); };
+    try { navigator.clipboard.writeText(text).then(done, function () { selectFallback(text); }); }
+    catch (e) { selectFallback(text); }
+  }
+  function selectFallback() { $('periodCode').select(); }
+  $('copyCode').addEventListener('click', function () { copy($('periodCode').value, this); });
+  $('copyHeader').addEventListener('click', function () {
+    var b = this;
+    try { navigator.clipboard.writeText($('headerText').textContent).then(function () { b.textContent = 'Copied'; }, function () {}); } catch (e) {}
+  });
+
+  fillHelper();
+  fillCodeTable();
+  $('fileName').value = '100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv';
+  $('periodCode').value = '2641';
+  run();
+})();
+</script>

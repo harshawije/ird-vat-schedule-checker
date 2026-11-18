@@ -1,0 +1,517 @@
+{
+ "own": "100000016",
+ "cases": [
+  {
+   "name": "blank_disallowed",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Mandatory data not available.,",
+    "first": [
+     "2",
+     "Column 'Disallowed VAT Amount' with data '' failed on validation due to RequiredFieldMissing."
+    ]
+   }
+  },
+  {
+   "name": "blank_inv",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LCwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Mandatory data not available.,",
+    "first": [
+     "2",
+     "Column 'Tax Invoice No' with data '' failed on validation due to RequiredFieldMissing."
+    ]
+   }
+  },
+  {
+   "name": "blank_line_middle",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KDQoyLDEwLzEyLzIwMjYsQi0yMDAyLDEwMDAwMDAzMixTdXBwbGllciBUd28sU2VydmljZXMsMTAwMDAuMDAsMTgwMC4wMCwwLjAwDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "exception",
+    "popup": "Please make sure there are no 'commas' in the data and try again.",
+    "first": null
+   }
+  },
+  {
+   "name": "comma_in_name",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIsIE9uZSxTZXJ2aWNlcywxMDAwMC4wMCwxODAwLjAwLDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "exception",
+    "popup": "Please make sure there are no 'commas' in the data and try again.",
+    "first": null
+   }
+  },
+  {
+   "name": "date_after_period",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMS8wNS8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "Invoice date should not be after the end of the taxable period."
+    ]
+   }
+  },
+  {
+   "name": "date_iso",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwyMDI2LTEwLTA1LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Date format is incorrect.",
+    "first": [
+     "2",
+     "Date format is not correct in Invoice Date"
+    ]
+   }
+  },
+  {
+   "name": "date_no_pad",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC81LzIwMjYsQi0yMDAyLDEwMDAwMDAzMixTdXBwbGllciBUd28sU2VydmljZXMsMTAwMDAuMDAsMTgwMC4wMCwwLjAwDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "desc_501",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERCwxMDAwMC4wMCwxODAwLjAwLDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Maximum length of records exceeded.,",
+    "first": [
+     "2",
+     "Column 'Description' with data 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD' failed on validation due to InvalidStringLength."
+    ]
+   }
+  },
+  {
+   "name": "disallowed_gt_vat",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDUwMDAuMDAsOTAwLjAwLDkwMC4wMQ0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "Disallowed tax amount should not exceed vat amount"
+    ]
+   }
+  },
+  {
+   "name": "extra_column",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudCxFeHRyYQ0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMCx4DQoyLDEwLzEyLzIwMjYsQi0yMDAyLDEwMDAwMDAzMixTdXBwbGllciBUd28sU2VydmljZXMsMTAwMDAuMDAsMTgwMC4wMCwwLjAwLHgNCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMCx4DQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation failed",
+    "first": [
+     "NA",
+     "Invalid Column Count"
+    ]
+   }
+  },
+  {
+   "name": "fn_amendment",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_AMENDMENT_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "filename",
+    "popup": "Name of the file is incorrect.",
+    "first": null
+   }
+  },
+  {
+   "name": "fn_bad_tin",
+   "file": "100000017_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "filename",
+    "popup": "TIN number enter in name is invalid.",
+    "first": null
+   }
+  },
+  {
+   "name": "fn_name_period_differs",
+   "file": "100000016_VAT_SCHEDULE02_2631_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "fn_suffix",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1 (1).csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "filename",
+    "popup": "Name of the file is incorrect.",
+    "first": null
+   }
+  },
+  {
+   "name": "header_only",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "The Schedule file is rejected due to unavailability of records.,",
+    "first": [
+     "NA",
+     "The Schedule file is rejected due to unavailability of records."
+    ]
+   }
+  },
+  {
+   "name": "inv_41",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBLDEwMDAwMDAzMixTdXBwbGllciBUd28sU2VydmljZXMsMTAwMDAuMDAsMTgwMC4wMCwwLjAwDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Maximum length of records exceeded.,",
+    "first": [
+     "2",
+     "Column 'Tax Invoice No' with data 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' failed on validation due to InvalidStringLength."
+    ]
+   }
+  },
+  {
+   "name": "inv_dot",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEEuNzcsMTAwMDAwMDMyLFN1cHBsaWVyIFR3byxTZXJ2aWNlcywxMDAwMC4wMCwxODAwLjAwLDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "The invoice number contains invalid character(s)."
+    ]
+   }
+  },
+  {
+   "name": "inv_dup_case",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LGludi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBUd28sU2VydmljZXMsMTAwMDAuMDAsMTgwMC4wMCwwLjAwDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "Duplicated Tax Invoice from same supplier."
+    ]
+   }
+  },
+  {
+   "name": "inv_space",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEEgNzcsMTAwMDAwMDMyLFN1cHBsaWVyIFR3byxTZXJ2aWNlcywxMDAwMC4wMCwxODAwLjAwLDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "Tax Invoice No entered is invalid. Please remove spaces."
+    ]
+   }
+  },
+  {
+   "name": "missing_column",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50DQoxLDEwLzA1LzIwMjYsSU5WLTEwMDEsMTAwMDAwMDI0LFN1cHBsaWVyIE9uZSxHb29kcyw1MDAwLjAwLDkwMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDkNCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "File schema mismatch.,",
+    "first": [
+     "NA",
+     "Column 'Disallowed VAT Amount' is required based on the file specification."
+    ]
+   }
+  },
+  {
+   "name": "ok",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "ok_bom",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "77u/U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "ok_quarter",
+   "file": "100000016_VAT_SCHEDULE02_2640_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2640",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "pc_empty",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "",
+   "expect": {
+    "stage": "exception",
+    "popup": "Error : Input string was not in a correct format.",
+    "first": null
+   }
+  },
+  {
+   "name": "pc_ends_before_dates",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2631",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "1",
+     "Invoice date should not be after the end of the taxable period."
+    ]
+   }
+  },
+  {
+   "name": "pc_invalid",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2603",
+   "expect": {
+    "stage": "exception",
+    "popup": "Error : String reference not set to an instance of a String.\r\nParameter name: s",
+    "first": null
+   }
+  },
+  {
+   "name": "reordered_columns",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "SW52b2ljZSBEYXRlLFNlcmlhbCBObyxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMTAvMDUvMjAyNiwxLElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMTAvMTIvMjAyNiwyLEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMTAvMjAvMjAyNiwzLEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "serial_dup",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMSwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "1",
+     "Serial No provided is duplicate"
+    ]
+   }
+  },
+  {
+   "name": "serial_zero",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMCwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "0",
+     "Serial number is invalid."
+    ]
+   }
+  },
+  {
+   "name": "tin_bad_check",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzMsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "TIN is not valid."
+    ]
+   }
+  },
+  {
+   "name": "tin_own",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMTYsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "Same TIN (indicated in schedule name) cannot be included as part of schedule record"
+    ]
+   }
+  },
+  {
+   "name": "tin_vat_reg_style",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzItNzAwMCxTdXBwbGllciBUd28sU2VydmljZXMsMTAwMDAuMDAsMTgwMC4wMCwwLjAwDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Maximum length of records exceeded.,",
+    "first": [
+     "2",
+     "Column 'Supplier's TIN' with data '100000032-7000' failed on validation due to InvalidStringLength."
+    ]
+   }
+  },
+  {
+   "name": "total_row",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDEwMDAwLjAwLDE4MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQosLCwsLCwxNzUwMC41MCwzMTUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Mandatory data not available.,",
+    "first": [
+     "",
+     "Column 'Serial No' with data '' failed on validation due to RequiredFieldMissing."
+    ]
+   }
+  },
+  {
+   "name": "value_3dp",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDUwMDAuMDAxLDkwMC4wMCwwLjAwDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "basic",
+    "popup": "Data type mismatch.,",
+    "first": [
+     "2",
+     "Column 'Value of purchase' with data '5000.001' failed on validation due to Decimal value require 15 digit and 2 decimal places.."
+    ]
+   }
+  },
+  {
+   "name": "value_negative",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLC01MDAwLjAwLC05MDAuMDAsMC4wMA0KMywxMC8yMC8yMDI2LEMvMzAwMywxMDAwMDAwNDAsU3VwcGxpZXIgVGhyZWUsUmVwYWlycywyNTAwLjUwLDQ1MC4wOSwwLjAwDQo=",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "Value of purchase can not be a negative value"
+    ]
+   }
+  },
+  {
+   "name": "value_zero_vat_zero",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDUwMDAsMC4wMCwwLjAwDQozLDEwLzIwLzIwMjYsQy8zMDAzLDEwMDAwMDA0MCxTdXBwbGllciBUaHJlZSxSZXBhaXJzLDI1MDAuNTAsNDUwLjA5LDAuMDANCg==",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "vat_15pct",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDUwMDAsNzUwLDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "VAT amount should be equal to (value of purchase) * Vat rate, applicable to invoice date."
+    ]
+   }
+  },
+  {
+   "name": "vat_15pct_jan2024",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwwMS8yMC8yMDI0LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDUwMDAsNzUwLDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "vat_plus_099",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDUwMDAsOTAwLjk5LDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "done",
+    "popup": "Validation passed!",
+    "first": null
+   }
+  },
+  {
+   "name": "vat_plus_100",
+   "file": "100000016_VAT_SCHEDULE02_2641_20261119_ORIGINAL_V1.csv",
+   "b64": "U2VyaWFsIE5vLEludm9pY2UgRGF0ZSxUYXggSW52b2ljZSBObyxTdXBwbGllcidzIFRJTixOYW1lIG9mIHRoZSBTdXBwbGllcixEZXNjcmlwdGlvbixWYWx1ZSBvZiBwdXJjaGFzZSxWQVQgQW1vdW50LERpc2FsbG93ZWQgVkFUIEFtb3VudA0KMSwxMC8wNS8yMDI2LElOVi0xMDAxLDEwMDAwMDAyNCxTdXBwbGllciBPbmUsR29vZHMsNTAwMC4wMCw5MDAuMDAsMC4wMA0KMiwxMC8xMi8yMDI2LEItMjAwMiwxMDAwMDAwMzIsU3VwcGxpZXIgVHdvLFNlcnZpY2VzLDUwMDAsOTAxLjAwLDAuMDANCjMsMTAvMjAvMjAyNixDLzMwMDMsMTAwMDAwMDQwLFN1cHBsaWVyIFRocmVlLFJlcGFpcnMsMjUwMC41MCw0NTAuMDksMC4wMA0K",
+   "period": "2641",
+   "expect": {
+    "stage": "special",
+    "popup": "Validation Failed",
+    "first": [
+     "2",
+     "VAT amount should be equal to (value of purchase) * Vat rate, applicable to invoice date."
+    ]
+   }
+  }
+ ]
+}

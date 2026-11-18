@@ -1,0 +1,11 @@
+{
+  "name": "ird-vat-schedule-checker",
+  "version": "1.0.0",
+  "description": "Check a Sri Lanka IRD VAT Schedule 02 CSV with the same rules as IRD's Schedule File Verifier v5.20.",
+  "main": "verifier.js",
+  "scripts": {
+    "build": "node tools/build.js",
+    "test": "node --test tests/verifier.test.js && python3 -m unittest discover -s tests"
+  },
+  "license": "MIT"
+}
