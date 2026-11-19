@@ -1,4 +1,4 @@
-# VAT Schedule 02 Checker
+# Sri Lankan VAT Schedule 02 Checker
 
 Check a Sri Lanka **VAT Schedule 02** file (input VAT, local purchases) before you upload it with your VAT return. The checker uses the same rules, in the same order, with the same messages as the Inland Revenue Department's **Schedule File Verifier v5.20**, so you get IRD's answer on any computer, including a Mac or a phone, without installing anything.
 
